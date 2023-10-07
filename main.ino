@@ -16,6 +16,8 @@ void loop() {
     if (current_data >= previous_data) {
       //Increase the value of previous data until it reaches the value of current data.
       while (previous_data <= current_data) {
+        current_data = analogRead(pedalPin);
+
         previous_data += 25;
         previous_data = constrain(previous_data, 10, 1030);
 
@@ -32,6 +34,7 @@ void loop() {
       // Decrease the value of current data until it reaches the value of previous data.
       while (previous_data > current_data) {
         previous_data -= 15;
+        current_data = analogRead(pedalPin);
 
         int pwmValue = map(previous_data, 0, 1023, 1, 255);
         analogWrite(pwmPin, pwmValue);
